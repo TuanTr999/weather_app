@@ -55,7 +55,11 @@ class DetailPage extends StatelessWidget {
                   ),
                 ],
               ),
-              actions: [Icon(CupertinoIcons.search), SizedBox(width: 15)],
+              actions: [
+                IconButton(onPressed: (){
+                  Navigator.push(context, route)
+                }, icon: Icon(CupertinoIcons.search))
+              ],
             ),
             body: DetailBody(listData: listData,),
           );
