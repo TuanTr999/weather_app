@@ -13,17 +13,17 @@ class BottomNavigationCustom extends StatefulWidget {
 
 class _BottomNavigationCustomState extends State<BottomNavigationCustom> {
   List<BottomNavigationBarItem> listItem = [
-    BottomNavigationBarItem(
-        icon: Icon(CupertinoIcons.home), label: 'Home'),
+    BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), label: 'Home'),
     BottomNavigationBarItem(
       icon: Icon(CupertinoIcons.list_bullet),
       label: 'List',
     ),
   ];
 
-  List<Widget> listPages = [const HomePage(), const DetailPage()];
+  List<Widget> listPages = [HomePage(), DetailPage()];
 
   int activePage = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,12 +35,13 @@ class _BottomNavigationCustomState extends State<BottomNavigationCustom> {
         unselectedItemColor: Colors.white24,
         backgroundColor: Colors.white12,
         elevation: 0,
-        onTap: (index){
+        onTap: (index) {
           setState(() {
             activePage = index;
           });
         },
-          items: listItem),
+        items: listItem,
+      ),
     );
   }
 }

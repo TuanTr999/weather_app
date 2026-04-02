@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/models/weather_model.dart';
@@ -35,25 +34,24 @@ class _HomePageState extends State<HomePage> {
             colors: [Color(0xFF1D6CF3), Color(0xFF19D2FE)],
           ),
         ),
-        child: FutureBuilder(
-          future: context.read<WeatherProvider>().getWeatherCurrent(),
-          initialData: null,
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
+        child: Consumer<WeatherProvider>(
+          builder: (context, provider, child) {
+            final data = provider.weatherCurrent;
+            if (data == null) {
+              // Dữ liệu chưa có: show loading
               return const Center(child: CircularProgressIndicator());
             }
-            if (!snapshot.hasData) {
-              return const Text('no data');
-            }
-            WeatherData data = snapshot.data as WeatherData;
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                HomeWeatherIcon(nameIcon: data.weather![0].main,),
-                HomeTemperature(temp: data.main.temp,),
-                HomeLocation(location: data.name,),
+                HomeWeatherIcon(nameIcon: data.weather![0].main),
+                HomeTemperature(temp: data.main.temp),
+                HomeLocation(location: provider.nameCity ?? ''),
                 const SizedBox(height: 50),
-                HomeDetail(wind: data.wind.speed, humidity: data.main.humidity,),
+                HomeDetail(
+                  wind: data.wind.speed,
+                  humidity: data.main.humidity,
+                ),
               ],
             );
           },

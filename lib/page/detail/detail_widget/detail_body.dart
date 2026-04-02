@@ -10,6 +10,7 @@ class DetailBody extends StatelessWidget {
   final List<WeatherDetail> listData;
 
 
+
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
